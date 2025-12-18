@@ -33,5 +33,4 @@ else:
         print(f"Root estimate: {xr_new:.6f} | Error: {ea:.6f}%")
         
 
-    
 print(f"The root is:{xr_new:6f}")
