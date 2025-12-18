@@ -19,8 +19,10 @@ def df(x):
 xcur=float(input("Please provide the guess"))
 thr=float(input("Please provide the threshold error"))
 ea=100
+iterations = 100
+iterr = 0
 
-while(ea>thr):
+while(ea>thr and iterr<100):
     newx=xcur-(f(xcur)/df(xcur))
     ea=abs(((newx-xcur)/newx)*100)
     # print(ea)
@@ -29,7 +31,11 @@ while(ea>thr):
     # print(xcur)
     # print(f(xcur))
     xcur=newx
-    print(f"Root estimate: {newx:.6f} | Error: {ea:.10f}")
+    print(f"Root estimate: {newx:.6f} | Error: {ea:.10f}%")
+    if(iterr==99):
+        print("----"*10)
+        print("Choose a better first guess.")
+    iterr+=1
 
-print(f"Final Root estimate: {newx:.6f} | Error: {ea:.10f}")
+print(f"Final Root estimate: {newx:.6f} | Error: {ea:.10f}%")
     
