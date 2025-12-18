@@ -5,38 +5,33 @@ Created on Sat Aug 15 11:49:40 2020
 @author: Abhishek
 """
 import math as m
-def f(i):
-    p=((i**m.log(i,m.e))-(m.e**m.sin(i))-(50*i))
+def f(x):
+    p=(x**2 - x - 2)
     return(p)
 
 xl=float(input("Give the lower limit "))
 xu=float(input("Give the upper limit "))
-#v=float(input("Give the velocity "))
-#m=float(input("Give the mass of the object "))
-#t=float(input("Provide the time of simulation "))
-tre=float(input("What is the threshold relative error(Provide 17 digit)"))
-g=9.8
-ea=100
+tre=float(input("Threshold of relative error"))
 
-while(ea>tre):
-    if(ea<=tre):
-        print(ea)
-        break
-    xr1=(xl+xu)/2
-    if((f(xl)*f(xu))<0):
-        if((f(xl)*f(xr1))<0):
-            xu=xr1
+print(f(xl))
+
+if (f(xl)*f(xu)) >= 0:
+    print("Invalid Brackets.")
+else:
+    ea = 100
+    xr = xl
+    while(ea>tre):
+        xr_new = (xl+xu)/2
+        if((f(xl)*f(xr_new))<0):
+            xu=xr_new
         else:
-            xl=xr1
-    else:
-        print("The given bracket is not valid.")
-    xr2=(xl+xu)/2
-    print(xr2)
-    print(xl)
-    print(xu)
-    ea=abs(((xr2-xr1)*100)/xr2)
-    print(ea)
+            xl=xr_new
+        if xr_new != 0:
+            ea = abs(((xr_new - xr) / xr_new) * 100)
+        xr = xr_new
+        
+        print(f"Root estimate: {xr_new:.6f} | Error: {ea:.6f}%")
+        
+
     
-#xr1=str(xr1)
-#ea=str(ea)
-#print("The value of the index is "+xr1+" with a relative error of "+ea)
+print(f"The root is:{xr_new:6f}")
