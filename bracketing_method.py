@@ -6,7 +6,7 @@ Created on Sat Aug 15 11:49:40 2020
 """
 import math as m
 def f(x):
-    p=(x**2 - x - 2)
+    p=(pow(m.e, -0.2*x)*m.sin(5*x+2)-(x/10))
     return(p)
 
 xl=float(input("Give the lower limit "))
