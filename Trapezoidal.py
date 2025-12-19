@@ -57,7 +57,6 @@ y_trap = f(x_trap)
 
 plt.plot(x_smooth, y_smooth, 'r-', lw=2, label='Actual Smooth Function')
 
-
 plt.plot(x_trap, y_trap, 'bo-', label='Trapezoidal Fit (Estimate)')
 
 plt.fill_between(x_trap, y_trap, color='blue', alpha=0.2, label='Trapezoidal Area')
