@@ -7,8 +7,10 @@ Created on Thu Oct 29 15:35:52 2020
 import numpy as np
 import scipy.integrate as integ
 import math as m
+import matplotlib.pyplot as plt
+
 def f(q):
-    r=float((1/(2*m.pi)**0.5)*((m.e)**((-q**2)/2)))
+    r=((1/(2*m.pi)**0.5)*((m.e)**((-q**2)/2)))
     return(r)
 def integrand(x):
     return ((1/(2*m.pi)**0.5)*((m.e)**((-x**2)/2)))
@@ -49,3 +51,30 @@ else:
 print(str(integration)+" is the value of your integration.")                        
 print(str(result[0])+" is the true value of integration.")
 print("The relative error is: "+str(abs((integration-result[0])*100/result[0])))
+
+
+h = (b - a) / n
+x_points = np.linspace(a, b, n + 1)
+y_points = f(x_points)
+
+
+x_fine = np.linspace(a, b, 500)
+plt.plot(x_fine, f(x_fine), 'r', label='Actual Gaussian Curve', lw=2)
+
+
+for i in range(0, n, 2):
+    
+    xi = x_points[i:i+3]
+    yi = y_points[i:i+3]
+    
+    poly = np.polyfit(xi, yi, 2)
+    p = np.poly1d(poly)
+    
+    x_slice = np.linspace(xi[0], xi[-1], 100)
+    plt.plot(x_slice, p(x_slice), 'b--')
+    plt.fill_between(x_slice, p(x_slice), color='blue', alpha=0.2)
+
+plt.scatter(x_points, y_points, color='black')
+plt.title("Simpson's 1/3 Rule: Parabolic Approximation")
+plt.legend()
+plt.show()
