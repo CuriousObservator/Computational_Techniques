@@ -1,0 +1,44 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+L, N = 1.0, 100
+dx = L / (N - 1)
+D = 0.01
+dt = 0.5 * (dx**2) / D  # CFL Stability Limit
+T_ign = 0.5
+R = 0.1
+
+T = np.zeros(N) 
+
+T[0:5] = 1.0 
+
+x_axis = np.linspace(0, L, N)
+
+for step in range(1000):
+    T_new = T.copy()
+    for i in range(1, N-1):
+        diff = D * (T[i+1] - 2*T[i] + T[i-1]) / dx**2
+        
+        react = R if T[i] > T_ign else 0
+        
+        T_new[i] = T[i] + (diff + react) * dt
+    
+    if step % 50 == 0:  # Plot every 50 steps
+        plt.plot(x_axis, T, label=f'Time Step {step}')
+        plt.ylim(0, 1.5) # Keep the y-axis steady to see the growth
+        plt.pause(0.01)  # Brief pause to create an "animation" effect
+
+
+    T_new[0], T_new[-1] = T_new[1], T_new[-2]
+    T = T_new
+
+
+
+# ... (inside your time loop) ...
+
+
+plt.xlabel('Distance on Neutron Star Surface')
+plt.ylabel('Temperature')
+plt.title('Starfire 1D: Thermonuclear Flame Propagation')
+plt.show()
+plt.savefig("Starfire-1d.png")
