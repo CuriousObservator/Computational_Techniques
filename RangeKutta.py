@@ -24,65 +24,27 @@ y1.append(y0)
 xval=[]
 xval.append(x0)
 if(k==2):
-    met=int(input("Which method do you want to use "
-                   "1)Heuns?"
-                   "2)Midpoint?"
-                   "3)Ralston's method?"
-                   "(1/2/3)"))
-    if(met==1):
-        a1,a2=0.5,0.5
-        meth="Heun's Method."
-        while(x<xn):
-            k1=f(x0,y0)
-            k2=f(x0+h,y0+h)
-            y=y0+((a1*k1)+(a2*k2))*h
-            y1.append(y)
-            x0=x0+h
-            y0=y
-            x=x0
-            xval.append(x)
-            error=round(((act(x0)-y0)/act(x0))*100,3)
-            print("y("+str(x0)+") = "+str(round(y0,3))+" with an error of "+str(error)+" %. using the "+str(meth))
-    if(met==2):
-        a1,a2=0,0.5
-        meth="Midpoint Method."
-        while(x<xn):
-            k1=f(x0,y0)
-            k2=f(x0+h/2,y0+h/2)
-            y=y0+((a1*k1)+(a2*k2))*h
-            y1.append(y)
-            x0=x0+h
-            y0=y
-            x=x0
-            xval.append(x)
-            error=round(((act(x0)-y0)/act(x0))*100,3)
-            print("y("+str(x0)+") = "+str(round(y0,3))+" with an error of "+str(error)+" %. using the "+str(meth))
+    met=int(input("1)Heuns? 2)Midpoint? 3)Ralstons? "))
+    
+    if(met==1): 
+        a1, a2, p1, q11 = 0.5, 0.5, 1, 1
+    elif(met==2): 
+        a1, a2, p1, q11 = 0, 1, 0.5, 0.5
+    elif(met==3): 
+        a1, a2, p1, q11 = 1/3, 2/3, 3/4, 3/4
+
+    while(x < xn):
+        k1 = f(x0, y0)
+        k2 = f(x0 + p1*h, y0 + q11*k1*h) 
+        y = y0 + (a1*k1 + a2*k2) * h
         
-    if(met==3):
-        a1,a2=1/3,2/3
-        meth="Ralston's Method."
-        while(x<xn):
-            k1=f(x0,y0)
-            
-            k2=f(x0+(3*h/4),y0+(3*h/4))
-            y=y0+((a1*k1)+(a2*k2))*h
-            y1.append(y)
-            x0=x0+h
-            y0=y
-            x=x0
-            xval.append(x)
-            error=round(((act(x0)-y0)/act(x0))*100,3)
-            print("y("+str(x0)+") = "+str(round(y0,3))+" with an error of "+str(error)+" %. using the "+str(meth))
-        
-    while(x<xn):
-        y=y0+((a1*k1)+(a2*k2))*h
         y1.append(y)
-        x0=x0+h
-        y0=y
-        x=x0
+        x0 += h
+        y0 = y
+        x = x0
         xval.append(x)
         error=round(((act(x0)-y0)/act(x0))*100,3)
-        print("y("+str(x0)+") = "+str(round(y0,3))+" with an error of "+str(error)+" %. using the "+str(meth))
+        print("y("+str(x0)+") = "+str(round(y0,3))+" with an error of "+str(error)+" %. using the "+str(met))
 
 if(k==3):
     while(x<xn):
