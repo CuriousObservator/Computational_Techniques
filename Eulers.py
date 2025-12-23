@@ -43,7 +43,6 @@ while(x<xn):
     print("y("+str(x0)+") = "+str(round(y0,3))+" with an error of "+str(error)+" %.")
 funval=[]
 
-
 for i in np.arange(0,x+h):
     funval.append(act(i))
 
